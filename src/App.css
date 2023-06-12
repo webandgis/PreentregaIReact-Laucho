@@ -1,8 +1,11 @@
-/* .App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+.App {
+  font-family: 'Amatic SC', cursive;
+
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -36,6 +39,4 @@
     transform: rotate(360deg);
   }
 } */
-.Navbar{
-  background-color: blueviolet;
-}
+
