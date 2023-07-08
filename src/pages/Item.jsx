@@ -1,14 +1,21 @@
-import React from 'react'
-import ItemDetailContainer from '../components/ItemDetailContainer'
-import ItemCount from '../components/ItemCount'
-import {ProductsGarza} from '../json/Products'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import ItemDetailContainer from '../components/ItemDetailContainer';
+import {doc,getDoc,getFirestore} from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
+
 const Item = () => {
-  const {itemId} = useParams()
+  const [productsData, setProductsData] = useState([]);
+  const { itemId } = useParams();
 
-  const productsGarzaid = ProductsGarza.filter(product => product.id === parseInt(itemId) );
+  useEffect(() => {
+    const db = getFirestore();
+    const productCollection = doc(db, 'products',itemId);
+    getDoc(productCollection).then((snapshot) => {
+      setProductsData( [{ id: snapshot.id, ...snapshot.data() }] );
+    });
+  }, [itemId]);
 
-  return <ItemDetailContainer productsData={productsGarzaid} />;
-  return <ItemCount initial={1} stock={15} onAdd= {(setQuantity)=> console.log('Producto agregado',setQuantity)}  />
+  return <ItemDetailContainer productsData={productsData} />;
 };
-export default Item
+
+export default Item;

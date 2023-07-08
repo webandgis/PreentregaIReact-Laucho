@@ -1,0 +1,15 @@
+.itemCart{
+    display: flex;
+    border-bottom: 1px solid purple;
+    max-width: 500px;
+    margin: 1rem auto
+}
+
+.itemCart img {
+    width: 200px;
+    margin-right: 1rem;
+}
+.btnItem{
+    background-color: #cfbcf3;
+    border: 1px solid purple;
+}

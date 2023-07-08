@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
+import { useCartContext } from '../context/CartContext';
 import ProductCard from './ProductCard';
 import ItemCount from './ItemCount';
+import { Link } from 'react-router-dom';
 
 const ItemDetailContainer = ({ productsData }) => {
-  const [itemCount, setItemCount] = useState(1);
+  const [goToCart, setGoToCart] = useState(false);
+  const { addProduct } = useCartContext();
 
-  const itemaddedToCart = (quantity) => {
-    console.log('Producto agregado', quantity);
-    setItemCount(quantity);
+  const onAdd = (quantity) => {
+    setGoToCart(true);
+    addProduct(productsData[0], quantity); 
   };
 
   return (
     <div>
-      <ItemCount
-        initial={1}
-        stock={15}
-        setCount={setItemCount}
-        onAdd={itemaddedToCart }
-      />
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', justifyContent: 'center', textAlign: 'center', marginBottom: '5px' }}>
         {productsData.map((product) => (
           <ProductCard key={product.id} productData={product} />
         ))}
+        {goToCart ? (
+          <Link to='/cart'>Ir al Carrito</Link>
+        ) : (
+          <ItemCount initial={0} stock={15} onAdd={onAdd} />
+        )}
       </div>
-      
     </div>
   );
 };

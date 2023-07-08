@@ -2,6 +2,7 @@ import React from 'react'
 import ItemListContainer from '../components/ItemListContainer'
 import {ProductsGarza} from '../json/Products'
 import { useParams } from 'react-router-dom'
+import { CartContext } from '../context/CartContext'
 
 const Category = () => {
   const {categoriaId} = useParams()

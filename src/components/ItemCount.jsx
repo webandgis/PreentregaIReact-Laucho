@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { useCartContext } from '../context/CartContext';
 
-const ItemCount = ({ stock, setCount, onAdd }) => {
-  const [count, setQuantity] = useState(1);
+const ItemCount = ({ initial, stock, onAdd }) => {
+  const { cart, addProduct } = useCartContext();
+  const [count, setCount] = React.useState(parseInt(initial));
 
   const addShop = () => {
-    if (count < stock) {
-      setQuantity(count + 1);
-    }
+    setCount(count + 1);
   };
 
   const returnShop = () => {
-    if (count > 1) {
-      setQuantity(count - 1);
-    }
+    setCount(count - 1);
   };
+
+  useEffect(() => {
+    setCount(parseInt(initial));
+  }, [initial]);
 
   return (
     <div className="Counter">
@@ -24,15 +26,16 @@ const ItemCount = ({ stock, setCount, onAdd }) => {
             backgroundColor: '#cfbcf3',
             color: 'purple',
             border: 'none',
-            marginLeft:'10%',
+            marginLeft: '10%',
             fontWeight: 'bold',
           }}
+          disabled={count <= 1}
           variant="primary"
           onClick={returnShop}
         >
           -
         </Button>
-        <h3  style={{ display: 'inline-block', margin: '0 10px',alignItems:'center'}}>
+        <h3 style={{ display: 'inline-block', margin: '0 10px', alignItems: 'center' }}>
           {count}
         </h3>
         <Button
@@ -42,6 +45,7 @@ const ItemCount = ({ stock, setCount, onAdd }) => {
             border: 'none',
             fontWeight: 'bold',
           }}
+          disabled={count >= stock}
           variant="primary"
           onClick={addShop}
         >
@@ -51,14 +55,14 @@ const ItemCount = ({ stock, setCount, onAdd }) => {
           <Button
             style={{
               backgroundColor: '#cfbcf3',
-              marginLeft:'9.3%',
+              marginLeft: '9.3%',
               color: 'purple',
               border: 'none',
               fontWeight: 'bold',
             }}
             variant="primary"
+            disabled={stock <= 0}
             onClick={() => onAdd(count)}
-            disabled={!stock}
           >
             Agregar al carrito
           </Button>
@@ -69,6 +73,3 @@ const ItemCount = ({ stock, setCount, onAdd }) => {
 };
 
 export default ItemCount;
-
-
-

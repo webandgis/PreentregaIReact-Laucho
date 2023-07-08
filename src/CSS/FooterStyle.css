@@ -1,0 +1,36 @@
+/*FOOTER*/
+#footer{
+    background-color: #cfbcf3;
+  
+    font-family: 'Amatic SC';
+    
+   
+  }
+  
+  #footer h4 p{
+    font-weight: bold;
+
+    font-size: 30px;
+  
+  }
+  
+  #footer h4{
+    font-weight: bold;
+    font-size: 30px;
+    color:purple;
+
+  
+  }
+  #footer h4:hover{
+    color: #ac87f0;
+  
+  
+  }
+
+  .btnFooter{
+    background-color: #ac87f0;
+    border-radius: 30%;
+    border: #ac87f0 solid 1px;
+    color: white;
+    margin-top: 10%;
+  }
